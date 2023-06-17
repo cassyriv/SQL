@@ -47,21 +47,16 @@ SELECT name FROM marvels WHERE gender = "Male";
 SELECT name FROM marvels WHERE gender = "Female";
 
 --selecting characters wit highest intelligence--
-SELECT * FROM marvels WHERE intelligence > 4 ORDER BY intelligence;
+SELECT name, intelligence FROM marvels WHERE intelligence > 4 ORDER BY intelligence;
 
 --selecting characters with high intelligence and average fighting skill--
-SELECT * FROM marvels WHERE intelligence > 4 AND fighting_skills > 3;
+SELECT name, intelligence, fighting_skills FROM marvels WHERE intelligence > 4 AND fighting_skills > 3;
 
--- selecting characters with average intelligence and high fighting skill--
-SELECT * FROM marvels WHERE intelligence < 4 OR fighting_skills > 4; 
+-- selecting characters with average intelligence or high fighting skill--
+SELECT name, intelligence, fighting_skills FROM marvels WHERE intelligence < 4 OR fighting_skills > 4; 
 
 --selecting characters from the USA with average speed--
-SELECT * FROM marvels WHERE speed > 3 AND hometown = "USA";
-
--- selecting characters by strengh and gender--
-SELECT gender, AVG(strength) FROM marvels
-    GROUP BY name
-    HAVING strength >5;
+SELECT name, speed, hometown FROM marvels WHERE speed > 3 AND hometown = "USA";
 
 --selecting characters by name with high energy projections--
 SELECT name, AVG(energy_Projection) FROM marvels

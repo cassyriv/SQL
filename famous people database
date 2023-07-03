@@ -17,4 +17,4 @@ SELECT * FROM channel;
 SELECT * FROM famous_person JOIN channel ON famous_person.id = channel.id;
 
 -better join that gave me exactly what i wanted to see- 
-SELECT famous_person.name, famous_person.job, channel.name FROM famous_person JOIN channel ON famous_person.id = channel.id; 
+SELECT famous_person.name, famous_person.job, channel.name AS channel FROM famous_person JOIN channel ON famous_person.id = channel.id; 

@@ -1,0 +1,20 @@
+/* Create table about the people and what they do here */
+CREATE TABLE famous_person (id INTEGER PRIMARY KEY, name TEXT, job TEXT);
+INSERT INTO famous_person VALUES (1, "Anthony Padilla", "Youtuber");
+INSERT INTO famous_person VALUES (2, "Ian Hecox", "Youtuber");
+INSERT INTO famous_person VALUES (3, "Ryan Higa", "Youtuber");
+
+CREATE TABLE channel (id INTEGER PRIMARY KEY, name TEXT );
+INSERT INTO channel VALUES (1, "Smosh");
+INSERT INTO channel VALUES (2, "Smosh");
+INSERT INTO channel VALUES (3, "NigaHiga");
+
+-I have listed some of my favorite famous people, Youtubers and created a separate table with their channels- 
+SELECT * FROM famous_person;
+SELECT * FROM channel;
+
+-basic join that almost gave me what i wanted to see- 
+SELECT * FROM famous_person JOIN channel ON famous_person.id = channel.id;
+
+-better join that gave me exactly what i wanted to see- 
+SELECT famous_person.name, famous_person.job, channel.name FROM famous_person JOIN channel ON famous_person.id = channel.id; 

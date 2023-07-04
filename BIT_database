@@ -43,3 +43,26 @@ ON FEB.orderid=cust.order_id
 WHERE Feb.Quantity>2
 AND length(orderid) = 6 
 AND orderid <> 'Order ID'
+
+--------------------------------------------------------------------------------------
+
+SELECT orderdate FROM BIT_DB.FebSales
+WHERE orderdate BETWEEN '02/13/19 00:00' AND '02/18/19 00:00'
+
+SELECT location FROM BIT_DB.FebSales
+WHERE orderdate = '02/18/19 01:35'
+
+SELECT sum(quantity) FROM BIT_DB.FebSales
+WHERE orderdate LIKE '02/18/19%'
+
+SELECT orderdate FROM BIT_DB.FebSales
+
+SELECT DISTINCT Product FROM BIT_DB.FebSales
+WHERE Product LIKE '%Batteries%'
+
+SELECT DISTINCT Product, Price FROM BIT_DB.FebSales
+WHERE Price LIKE '%.99'
+
+SELECT Product, SUM(quantity) FROM BIT_DB.FebSales
+WHERE location LIKE '%Los Angeles%'
+GROUP BY Product

@@ -1,0 +1,48 @@
+SELECT * FROM fortune_companies; 
+
+-here i wanted to see which company have the highest revenue, grouped by company with industry type as additional data- 
+SELECT company_name, industry, revenue
+FROM fortune_companies
+GROUP BY company_name
+HAVING revenue >= 400; 
+
+-i used there health care benefits data to show me which companies actually provided healthcare- 
+SELECT * 
+FROM fortune_companies
+WHERE healthcare_benefits=1; 
+
+-i wanted to see which companies have healthcare, but also a certain number of PTO days and materinity leave weeks- 
+SELECT company_name, healthcare_benefits, paid_time_off_days AS PTO, maternity_leave_weeks AS MatLeave
+FROM fortune_companies
+WHERE PTO >= 15
+AND MatLeave >= 10
+AND healthcare_benefits=1; 
+
+- i used aggregate functions to tell me the companies with the least and most employees- 
+SELECT company_name, MIN(employees)
+FROM fortune_companies; 
+
+SELECT company_name, MAX(employees)
+FROM fortune_companies; 
+
+-i used case to group tenure by a certian number to determine turnover stats (that make sense to me) and ordered them from highest to lowest- 
+SELECT company_name, avg_employee_tenure AS Tenure,
+CASE WHEN avg_employee_tenure >= 5.0 THEN "Low turnover"
+WHEN avg_employee_tenure >=3.0 THEN "Medium turnover"
+ELSE "High turnover"
+END AS "Turnover"
+FROM fortune_companies
+ORDER BY Tenure DESC; 
+
+- here i wanted to see the avg employee tenure rates along with if healthcare was provided- 
+SELECT company_name, avg_employee_tenure, healthcare_benefits
+FROM fortune_companies
+WHERE healthcare_benefits=1
+AND avg_employee_tenure >5; 
+
+- i wanted to see which tech companies had the revenue over a certian number and order from highest to lowest- 
+SELECT company_name, industry, revenue
+FROM fortune_companies
+WHERE industry = 'Technology'
+AND revenue >= 300; 
+ORDER BY revenue DESC; 

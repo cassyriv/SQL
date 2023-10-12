@@ -1,0 +1,84 @@
+-i used the join function to find out which albums were done by various artists-
+SELECT Name, Title FROM artists
+INNER JOIN albums
+ON artists.ArtistId = albums.ArtistId
+WHERE Name = 'Various Artists'; 
+
+-i used the LIKE function to see artists name that stated with A-
+SELECT Name FROM artists
+WHERE Name LIKE 'A%'; 
+
+-i wanted the names of customers in brazil-
+SELECT FirstName, LastName, Country FROM customers
+WHERE Country = 'Brazil';
+
+-i used the join function to see invoice information in brazil-
+SELECT FirstName, LastName, InvoiceId, InvoiceDate, BillingCountry FROM customers
+INNER JOIN invoices
+ON customers.CustomerId = invoices.CustomerId
+WHERE BillingCountry = 'Brazil';
+
+-here i wanted to see which employees are managers of any kind-
+SELECT FirstName, LastName, Title, Phone, Email FROM employees
+WHERE Title LIKE '%Manager%' ;
+
+-i wanted to see invoice from in 2010-
+SELECT * FROM invoices
+WHERE InvoiceDate LIKE '%2010%'
+AND BillingCountry = 'Brazil';
+
+-here i wanted to see the sum total of invoices from 2010
+SELECT SUM(Total) FROM invoices
+WHERE InvoiceDate LIKE '2010%';
+
+-i wanted a list of which countries have invoices-
+SELECT DISTINCT(BillingCountry) FROM invoices;
+
+-here i wanted to see customers from anywhere outside the usa-
+SELECT FirstName, LastName, Country FROM customers
+WHERE Country <> 'USA';
+
+-i wanted a list of ac/dc tracks and their price-
+SELECT Name, Composer, UnitPrice FROM tracks
+WHERE Composer = 'AC/DC'; 
+
+-and here i wanted the sum total that ac/dc brought in-
+SELECT Composer, SUM(UnitPrice) AS Sales FROM tracks
+WHERE Composer = 'AC/DC';
+
+-i used the join function to see the customers name, country and which sales agent helped them-
+SELECT DISTINCT customers.FirstName AS CustomerFirst , customers.LastName AS CustomerLast, BillingCity, employees.FirstName AS SalesAgentFirst, employees.LastName AS SalesAgentLast
+FROM customers
+JOIN invoices
+ON customers.CustomerId = invoices.CustomerId
+JOIN employees 
+ON employees.EmployeeId = customers.SupportRepid;
+
+-i used aggregrate functions to get a better idea of this table-
+SELECT MIN(UnitPrice) FROM invoice_items;
+SELECT MAX(UnitPrice) FROM invoice_items;
+SELECT AVG(UnitPrice) FROM invoice_items; 
+SELECT ROUND(0.99, 1) FROM invoice_items; 
+
+-here i wanted to see the information of these tables that i did not use much in my other queries-
+SELECT * FROM genres;
+SELECT * FROM media_types;
+
+-i used the case statement to group tracks by their milliseconds-
+SELECT Name, Milliseconds,
+CASE
+    WHEN Milliseconds >300000 THEN 'Long'
+    WHEN Milliseconds >150000 THEN 'Middle'
+    ELSE 'Short'
+END AS Length
+FROM tracks;
+
+-wanted to use the group by function in customers table-
+SELECT FirstName, LastName, Country
+FROM customers
+GROUP BY Country
+LIMIT 10;
+
+-and i wanted to use the order by function here-
+SELECT Name, TrackId, UnitPrice FROM tracks
+ORDER BY UnitPrice DESC;
